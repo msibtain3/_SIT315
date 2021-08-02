@@ -1,0 +1,41 @@
+// C++ code
+//
+int LED_1 = 13;
+int LED_2 = 12;
+int PIR_1 = 2;
+int PIR_2 = 3;
+
+volatile bool state1 = false;
+volatile bool state2 = false;
+
+void setup()
+{
+  pinMode(LED_1, OUTPUT);
+  pinMode(PIR_1, INPUT);
+   pinMode(LED_2, OUTPUT);
+  pinMode(PIR_2, INPUT);
+  Serial.begin(9600);
+  attachInterrupt(digitalPinToInterrupt(PIR_1),_state,CHANGE);
+    attachInterrupt(digitalPinToInterrupt(PIR_2),_state2,CHANGE);
+
+}
+
+void loop()
+{
+  
+}
+
+void _state()
+{
+  state1 = !state1;
+  digitalWrite(LED_1,state1);
+  Serial.println("Detected Motion on LED 1");
+}
+
+
+void _state2()
+{
+  state2 = !state2;
+  digitalWrite(LED_2,state2);
+  Serial.println("Detected Motion LED 2");
+}
